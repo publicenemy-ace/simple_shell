@@ -6,15 +6,15 @@ list_t *appd_node_end(list_t **head, char *dir);
 void set_free_list(list_t *head);
 
 /**
- * appd_alias_end - Adds/Append a node to the end of a alias_t linked list.
- * @h: A pointer to the head of the list_t list.
- * @n: The name of the new alias to be added.
- * @v: The value of the new alias to be added.
+ * appd_alias_end - Adds a node to the end of a alias_t linked list.
+ * @head: A pointer to the head of the list_t list.
+ * @name: The name of the new alias to be added.
+ * @value: The value of the new alias to be added.
  *
  * Return: If an error occurs - NULL.
  *         Otherwise - a pointer to the new node.
  */
-alias_t *appd_alias_end(alias_t **h, char *n, char *v)
+alias_t *appd_alias_end(alias_t **head, char *name, char *value)
 {
 	alias_t *new_node = malloc(sizeof(alias_t));
 	alias_t *last;
@@ -23,37 +23,37 @@ alias_t *appd_alias_end(alias_t **h, char *n, char *v)
 		return (NULL);
 
 	new_node->next = NULL;
-	new_node->n = malloc(sizeof(char) * (_strlen(n) + 1));
-	if (!new_node->n)
+	new_node->name = malloc(sizeof(char) * (_strlen(name) + 1));
+	if (!new_node->name)
 	{
 		free(new_node);
 		return (NULL);
 	}
-	new_node->v = v;
-	_strcpy(new_node->n, n);
+	new_node->value = value;
+	_strcpy(new_node->name, name);
 
-	if (*h)
+	if (*head)
 	{
-		last = *h;
+		last = *head;
 		while (last->next != NULL)
 			last = last->next;
 		last->next = new_node;
 	}
 	else
-		*h = new_node;
+		*head = new_node;
 
 	return (new_node);
 }
 
 /**
  * appd_node_end - Adds/Append a node to the end of a list_t linked list.
- * @h: A pointer to the head of the list_t list.
- * @d: The directory path for the new node to contain.
+ * @head: A pointer to the head of the list_t list.
+ * @dir: The directory path for the new node to contain.
  *
  * Return: If an error occurs - NULL.
  *         Otherwise - a pointer to the new node.
  */
-list_t *appd_node_end(list_t **h, char *d)
+list_t *appd_node_end(list_t **head, char *dir)
 {
 	list_t *new_node = malloc(sizeof(list_t));
 	list_t *last;
@@ -61,53 +61,53 @@ list_t *appd_node_end(list_t **h, char *d)
 	if (!new_node)
 		return (NULL);
 
-	new_node->d = d;
+	new_node->dir = dir;
 	new_node->next = NULL;
 
-	if (*h)
+	if (*head)
 	{
-		last = *h;
+		last = *head;
 		while (last->next != NULL)
 			last = last->next;
 		last->next = new_node;
 	}
 	else
-		*h = new_node;
+		*head = new_node;
 
 	return (new_node);
 }
 
 /**
  * setfree_alias_list - Frees a alias_t linked list.
- * @h: The head of the alias_t list.
+ * @head: The head of the alias_t list.
  */
-void setfree_alias_list(alias_t *h)
+void setfree_alias_list(alias_t *head)
 {
 	alias_t *next;
 
-	while (h)
+	while (head)
 	{
-		next = hd->next;
-		free(hd->n);
-		free(h->v);
-		free(h);
-		h = next;
+		next = head->next;
+		free(head->name);
+		free(head->value);
+		free(head);
+		head = next;
 	}
 }
 
 /**
  * set_free_list - Frees a list_t linked list.
- * @h: The head of the list_t list.
+ * @head: The head of the list_t list.
  */
-void set_free_list(list_t *h)
+void set_free_list(list_t *head)
 {
 	list_t *next;
 
-	while (h)
+	while (head)
 	{
-		next = h->next;
-		free(h->dir);
-		free(h);
-		h = next;
+		next = head->next;
+		free(head->dir);
+		free(head);
+		head = next;
 	}
 }

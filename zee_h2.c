@@ -1,25 +1,25 @@
 #include "main.h"
 
 void part_line(char **line, ssize_t read);
-ssize_t new_length(char *line);
-void logical_line_ops(char *line, ssize_t *new_length);
+ssize_t new_len(char *line);
+void logical_line_ops(char *line, ssize_t *new_len);
 
 /**
  * part_line - Partitions a line read from standard input as needed.
  * @line: A pointer to a line read from standard input.
- * @rd: The length of line.
+ * @read: The length of line.
  *
  * Description: Spaces are inserted to separate ";", "||", and "&&".
  *              Replaces "#" with '\0'.
  */
-void part_line(char **line, ssize_t rd)
+void part_line(char **line, ssize_t read)
 {
 	char *old_line, *new_line;
 	char previous, current, next;
 	size_t i, j;
 	ssize_t new_length;
 
-	new_length = new_length(*line);
+	new_len = new_len(*line);
 	if (new_len == read - 1)
 		return;
 	new_line = malloc(new_length + 1);
@@ -96,7 +96,7 @@ void part_line(char **line, ssize_t rd)
 }
 
 /**
- * new_length - Gets the new length of a line partitioned
+ * new_len - Gets the new length of a line partitioned
  *               by ";", "||", "&&&", or "#".
  * @line: The line to check.
  *
@@ -105,7 +105,7 @@ void part_line(char **line, ssize_t rd)
  * Description: Cuts short lines containing '#' comments with '\0'.
  */
 
-ssize_t new_length(char *line)
+ssize_t new_len(char *line)
 {
 	size_t i;
 	ssize_t new_len = 0;
@@ -143,7 +143,7 @@ ssize_t new_length(char *line)
 					new_len++;
 			}
 			else
-				logical_ops(&line[i], &new_len);
+				logical_line_ops(&line[i], &new_len);
 		}
 		else if (current == ';')
 		{
@@ -159,9 +159,9 @@ ssize_t new_length(char *line)
 /**
  * logical_line_ops - Checks a line for logical operators "||" or "&&".
  * @line: A pointer to the character to check in the line.
- * @new_length: Pointer to new_len in get_new_len function.
+ * @new_len: Pointer to new_len in get_new_len function.
  */
-void logical_line_ops(char *line, ssize_t *new_length)
+void logical_line_ops(char *line, ssize_t *new_len)
 {
 	char previous, current, next;
 
@@ -172,15 +172,15 @@ void logical_line_ops(char *line, ssize_t *new_length)
 	if (current == '&')
 	{
 		if (next == '&' && previous != ' ')
-			(*new_length)++;
+			(*new_len)++;
 		else if (previous == '&' && next != ' ')
-			(*new_length)++;
+			(*new_len)++;
 	}
 	else if (current == '|')
 	{
 		if (next == '|' && previous != ' ')
-			(*new_length)++;
+			(*new_len)++;
 		else if (previous == '|' && next != ' ')
-			(*new_length)++;
+			(*new_len)++;
 	}
 }

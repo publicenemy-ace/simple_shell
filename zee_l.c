@@ -21,7 +21,7 @@ char *get_cmd_location(char *cmd)
 	if (!path || !(*path))
 		return (NULL);
 
-	dirs = get_path_dir(*path + 5);
+	dirs = fetch_path_dir(*path + 5);
 	head = dirs;
 
 	while (dirs)
