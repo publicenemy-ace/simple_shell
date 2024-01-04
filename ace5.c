@@ -69,7 +69,7 @@ int exit_shell(char **args, char **front)
 		return (make_error(--args, 2));
 	args -= 1;
 	set_args_free(args, front);
-	free_env();
+	release_env();
 	setfree_alias_list(aliases);
 	exit(num);
 }

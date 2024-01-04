@@ -57,7 +57,7 @@ int run(char **args, char **front)
 			execve(command, args, environ);
 			if (errno == EACCES)
 				ret = (make_error(args, 126));
-			free_env();
+			release_env();
 			set_args_free(args, front);
 			setfree_alias_list(aliases);
 			_exit(ret);
@@ -91,14 +91,14 @@ int main(int argc, char *argv[])
 	signal(SIGINT, sig_handler);
 
 	*exe_ret = 0;
-	environ = _copyenv();
+	environ = _duplicate_env();
 	if (!environ)
 		exit(-100);
 
 	if (argc != 1)
 	{
 		ret = process_file_cmd(argv[1], exe_ret);
-		free_env();
+		release_env();
 		setfree_alias_list(aliases);
 		return (*exe_ret);
 	}
@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
 	{
 		while (ret != END_OF_FILE && ret != EXIT)
 			ret = handle_args(exe_ret);
-		free_env();
+		release_env();
 		setfree_alias_list(aliases);
 		return (*exe_ret);
 	}
@@ -120,13 +120,13 @@ int main(int argc, char *argv[])
 		{
 			if (ret == END_OF_FILE)
 				write(STDOUT_FILENO, new_line, 1);
-			free_env();
+			release_env();
 			setfree_alias_list(aliases);
 			exit(*exe_ret);
 		}
 	}
 
-	free_env();
+	release_env();
 	setfree_alias_list(aliases);
 	return (*exe_ret);
 }
