@@ -13,13 +13,13 @@ int help_shell(char **args, char __attribute__((__unused__)) **front);
 int (*get_builtin(char *command))(char **args, char **front)
 {
 	builtin_t funcs[] = {
-		{ "exit", shellby_exit },
-		{ "env", shellby_env },
-		{ "setenv", shellby_setenv },
-		{ "unsetenv", shellby_unsetenv },
-		{ "cd", shellby_cd },
-		{ "alias", shellby_alias },
-		{ "help", shellby_help },
+		{ "exit", exit_shell },
+		{ "env", env_shell },
+		{ "setenv", setenv_shell },
+		{ "unsetenv", unsetenv_shell },
+		{ "cd", cd_shell },
+		{ "alias", alias_shell },
+		{ "help", help_shell },
 		{ NULL, NULL }
 	};
 	int i;
@@ -70,7 +70,7 @@ int exit_shell(char **args, char **front)
 	args -= 1;
 	free_args(args, front);
 	free_env();
-	free_alias_list(aliases);
+	setfree_alias_list(aliases);
 	exit(num);
 }
 
@@ -122,8 +122,8 @@ int cd_shell(char **args, char __attribute__((__unused__)) **front)
 	}
 	else
 	{
-		if (_getenv("HOME") != NULL)
-			chdir(*(_getenv("HOME")) + 5);
+		if (getenv("HOME") != NULL)
+			chdir(*(getenv("HOME")) + 5);
 	}
 
 	pwd = getcwd(pwd, 0);
@@ -136,12 +136,12 @@ int cd_shell(char **args, char __attribute__((__unused__)) **front)
 
 	dir_info[0] = "OLDPWD";
 	dir_info[1] = oldpwd;
-	if (shellby_setenv(dir_info, dir_info) == -1)
+	if (setenv_shell(dir_info, dir_info) == -1)
 		return (-1);
 
 	dir_info[0] = "PWD";
 	dir_info[1] = pwd;
-	if (shellby_setenv(dir_info, dir_info) == -1)
+	if (setenv_shell(dir_info, dir_info) == -1)
 		return (-1);
 	if (args[0] && args[0][0] == '-' && args[0][1] != '-')
 	{
