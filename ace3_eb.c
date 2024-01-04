@@ -99,8 +99,8 @@ int unsetenv_shell(char **args, char __attribute__((__unused__)) **front)
 	int index, index2;
 
 	if (!args[0])
-		return (create_error(args, -1));
-	env_var = _getenv(args[0]);
+		return (make_error(args, -1));
+	env_var = getenv(args[0]);
 	if (!env_var)
 		return (0);
 
@@ -109,7 +109,7 @@ int unsetenv_shell(char **args, char __attribute__((__unused__)) **front)
 
 	new_environ = malloc(sizeof(char *) * size);
 	if (!new_environ)
-		return (create_error(args, -1));
+		return (make_error(args, -1));
 
 	for (index = 0, index2 = 0; environ[index]; index++)
 	{
