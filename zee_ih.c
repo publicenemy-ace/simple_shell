@@ -36,7 +36,7 @@ char *fetch_args(char *line, int *exe_ret)
 
 	line[read - 1] = '\0';
 	replace_variable_(&line, exe_ret);
-	handle_line(&line, read);
+	part_line(&line, read);
 
 	return (line);
 }
