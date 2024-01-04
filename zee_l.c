@@ -17,7 +17,7 @@ char *get_cmd_location(char *cmd)
 	list_t *dirs, *head;
 	struct stat st;
 
-	path = getenv("PATH");
+	path = _acqenv("PATH");
 	if (!path || !(*path))
 		return (NULL);
 
