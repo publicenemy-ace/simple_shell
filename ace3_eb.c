@@ -56,7 +56,7 @@ int setenv_shell(char **args, char __attribute__((__unused__)) **front)
 	_strcat(new_value, "=");
 	_strcat(new_value, args[1]);
 
-	env_var = getenv(args[0]);
+	env_var = _acqenv(args[0]);
 	if (env_var)
 	{
 		free(*env_var);
@@ -100,7 +100,7 @@ int unsetenv_shell(char **args, char __attribute__((__unused__)) **front)
 
 	if (!args[0])
 		return (make_error(args, -1));
-	env_var = getenv(args[0]);
+	env_var = _acqenv(args[0]);
 	if (!env_var)
 		return (0);
 
