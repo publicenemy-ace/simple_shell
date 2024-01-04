@@ -91,7 +91,7 @@ int process_file_cmd(char *file_path, int *exe_ret)
 		}
 	}
 	replace_variable_( exe_ret);
-	handle_line(line, line_size);
+	part_line(line, line_size);
 	args = _str_token(line, ";");
 	free(line);
 	if (!args)
