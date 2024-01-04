@@ -122,7 +122,7 @@ int execute_args(char **args, char **front, int *exe_ret)
 	}
 	else
 	{
-		*exe_ret = execute_args(args, front);
+		*exe_ret = execute(args, front);
 		ret = *exe_ret;
 	}
 
