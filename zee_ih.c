@@ -151,14 +151,14 @@ int handle_args(int *exe_ret)
 	if (!line)
 		return (END_OF_FILE);
 
-	args = _strtok(line, " ");
+	args = _str_token(line, " ");
 	free(line);
 	if (!args)
 		return (ret);
 	if (valid_args(args) != 0)
 	{
 		*exe_ret = 2;
-		free_args(args, args);
+		set_args_free(args, args);
 		return (*exe_ret);
 	}
 	front = args;
@@ -200,10 +200,10 @@ int valid_args(char **args)
 		if (cur[0] == ';' || cur[0] == '&' || cur[0] == '|')
 		{
 			if (i == 0 || cur[1] == ';')
-				return (create_error(&args[i], 2));
+				return (make_error(&args[i], 2));
 			nex = args[i + 1];
 			if (nex && (nex[0] == ';' || nex[0] == '&' || nex[0] == '|'))
-				return (create_error(&args[i + 1], 2));
+				return (make_error(&args[i + 1], 2));
 		}
 	}
 	return (0);
