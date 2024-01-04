@@ -68,7 +68,7 @@ int exit_shell(char **args, char **front)
 	if (num > max - 1)
 		return (make_error(--args, 2));
 	args -= 1;
-	free_args(args, front);
+	set_args_free(args, front);
 	free_env();
 	setfree_alias_list(aliases);
 	exit(num);
