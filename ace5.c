@@ -99,7 +99,7 @@ int cd_shell(char **args, char __attribute__((__unused__)) **front)
 			if ((args[0][1] == '-' && args[0][2] == '\0') ||
 					args[0][1] == '\0')
 			{
-				if (_getenv("OLDPWD") != NULL)
+				if (getenv("OLDPWD") != NULL)
 					(chdir(*_getenv("OLDPWD") + 7));
 			}
 			else
