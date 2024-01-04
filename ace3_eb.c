@@ -47,11 +47,11 @@ int setenv_shell(char **args, char __attribute__((__unused__)) **front)
 	int index;
 
 	if (!args[0] || !args[1])
-		return (create_error(args, -1));
+		return (make_error(args, -1));
 
 	new_value = malloc(_strlen(args[0]) + 1 + _strlen(args[1]) + 1);
 	if (!new_value)
-		return (create_error(args, -1));
+		return (make_error(args, -1));
 	_strcpy(new_value, args[0]);
 	_strcat(new_value, "=");
 	_strcat(new_value, args[1]);
