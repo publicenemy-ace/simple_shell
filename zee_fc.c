@@ -90,8 +90,8 @@ int process_file_cmd(char *file_path, int *exe_ret)
 				line[i] = ' ';
 		}
 	}
-	replace_variable_( exe_ret);
-	part_line(line, line_size);
+	replace_variable_( &line,exe_ret);
+	part_line(&line, line_size);
 	args = _str_token(line, ";");
 	free(line);
 	if (!args)
