@@ -17,7 +17,7 @@ char *get_cmd_location(char *cmd)
 	list_t *dirs, *head;
 	struct stat st;
 
-	path = _getenv("PATH");
+	path = getenv("PATH");
 	if (!path || !(*path))
 		return (NULL);
 
@@ -26,13 +26,13 @@ char *get_cmd_location(char *cmd)
 
 	while (dirs)
 	{
-		temp = malloc(_strlen(dirs->dir) + _strlen(command) + 2);
+		temp = malloc(_strlen(dirs->dir) + _strlen(cmd) + 2);
 		if (!temp)
 			return (NULL);
 
 		_strcpy(temp, dirs->dir);
 		_strcat(temp, "/");
-		_strcat(temp, command);
+		_strcat(temp, cmd);
 
 		if (stat(temp, &st) == 0)
 		{
@@ -62,7 +62,7 @@ char *fetch_full_PATH(char *path)
 	int i, length = 0;
 	char *path_copy, *pwd;
 
-	pwd = *(_getenv("PWD")) + 4;
+	pwd = (getenv("PWD")) + 4;
 	for (i = 0; path[i]; i++)
 	{
 		if (path[i] == ':')
@@ -120,16 +120,16 @@ list_t *fetch_path_dir(char *path)
 	path_copy = fetch_full_PATH(path);
 	if (!path_copy)
 		return (NULL);
-	dirs = _strtok(path_copy, ":");
+	dirs = _str_token(path_copy, ":");
 	free(path_copy);
 	if (!dirs)
 		return (NULL);
 
 	for (index = 0; dirs[index]; index++)
 	{
-		if (add_node_end(&head, dirs[index]) == NULL)
+		if (appd_node_end(&head, dirs[index]) == NULL)
 		{
-			free_list(head);
+			set_free_list(head);
 			free(dirs);
 			return (NULL);
 		}
