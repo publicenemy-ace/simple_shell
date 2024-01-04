@@ -127,14 +127,14 @@ ssize_t getline(char **buff_lineptr, size_t *s, FILE *strm)
 		}
 
 		if (input >= 120)
-			buffer = _realloc(buffer, input, input + 1);
+			buffer = mem_realloc(buffer, input, input + 1);
 
 		buffer[input] = c;
 		input++;
 	}
 	buffer[input] = '\0';
 
-	update_lineptr(buff_lineptr, n, buffer, input);
+	update_lineptr(buff_lineptr, s, buffer, input);
 
 	ret = input;
 	if (r != 0)

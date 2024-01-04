@@ -71,14 +71,14 @@ char *_itoa(int num);
 
 /* Input Helpers */
 void part_line(char **line, ssize_t read);
-void replace_variable_(char **args, int *exe_ret);
+void replace_variable_(int *exe_ret);
 char *fetch_args(char *line, int *exe_ret);
 int part_args(char **args, char **front, int *exe_ret);
 int execute_args(char **args, char **front, int *exe_ret);
 int handle_args(int *exe_ret);
 int valid_args(char **args);
 void set_args_free(char **args, char **front);
-char **replace_aliases(char **args);
+char **displace_aliases(char **args);
 
 /* String functions */
 int _strlen(const char *s);

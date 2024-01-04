@@ -17,12 +17,12 @@ void part_line(char **line, ssize_t read)
 	char *old_line, *new_line;
 	char previous, current, next;
 	size_t i, j;
-	ssize_t new_length;
+	ssize_t new_len;
 
 	new_len = new_len(*line);
 	if (new_len == read - 1)
 		return;
-	new_line = malloc(new_length + 1);
+	new_line = malloc(new_len + 1);
 	if (!new_line)
 		return;
 	j = 0;

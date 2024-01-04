@@ -63,7 +63,7 @@ int process_file_cmd(char *file_path, int *exe_ret)
 	file = open(file_path, O_RDONLY);
 	if (file == -1)
 	{
-		*exe_ret = cant_open(file_path);
+		*exe_ret = open_error(file_path);
 		return (*exe_ret);
 	}
 	line = malloc(sizeof(char) * old_size);
@@ -75,7 +75,7 @@ int process_file_cmd(char *file_path, int *exe_ret)
 			return (*exe_ret);
 		buffer[b_read] = '\0';
 		line_size += b_read;
-		line = _realloc(line, old_size, line_size);
+		line = mem_realloc(line, old_size, line_size);
 		_strcat(line, buffer);
 		old_size = line_size;
 	} while (b_read);
@@ -90,16 +90,16 @@ int process_file_cmd(char *file_path, int *exe_ret)
 				line[i] = ' ';
 		}
 	}
-	variable_replacement(&line, exe_ret);
-	handle_line(&line, line_size);
-	args = _strtok(line, " ");
+	replace_variable_( exe_ret);
+	handle_linie(line, line_size);
+	args = _str_token(line, ";");
 	free(line);
 	if (!args)
 		return (0);
-	if (check_args(args) != 0)
+	if (valid_args(args) != 0)
 	{
 		*exe_ret = 2;
-		free_args(args, args);
+		set_args_free(args, args);
 		return (*exe_ret);
 	}
 	front = args;
@@ -110,13 +110,13 @@ int process_file_cmd(char *file_path, int *exe_ret)
 		{
 			free(args[i]);
 			args[i] = NULL;
-			ret = call_args(args, front, exe_ret);
+			ret = part_args(args, front, exe_ret);
 			args = &args[++i];
 			i = 0;
 		}
 	}
 
-	ret = call_args(args, front, exe_ret);
+	ret = part_args(args, front, exe_ret);
 
 	free(front);
 	return (ret);

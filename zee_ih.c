@@ -81,7 +81,7 @@ int part_args(char **args, char **front, int *exe_ret)
 			args[index] = NULL;
 			args = displace_aliases(args);
 			ret = execute_args(args, front, exe_ret);
-			if (*exit_stat == 0)
+			if (*exe_ret == 0)
 			{
 				args = &args[++index];
 				index = 0;
@@ -122,7 +122,7 @@ int execute_args(char **args, char **front, int *exe_ret)
 	}
 	else
 	{
-		*exe_ret = execute(args, front);
+		*exe_ret = execute_args(args, front);
 		ret = *exe_ret;
 	}
 
@@ -147,7 +147,7 @@ int handle_args(int *exe_ret)
 	int ret = 0, index;
 	char **args, *line = NULL, **front;
 
-	line = fetch_args(line, exe_ret;
+	line = fetch_args(line, exe_ret);
 	if (!line)
 		return (END_OF_FILE);
 
@@ -179,6 +179,7 @@ int handle_args(int *exe_ret)
 
 	free(front);
 	return (ret);
+	;
 }
 
 /**

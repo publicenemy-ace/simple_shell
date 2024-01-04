@@ -3,7 +3,7 @@
 void set_args_free(char **args, char **front);
 char *fetch_pid(void);
 char *fetch_env_value(char *beginning, int len);
-void replace_variable_(char **args, int *exe_ret);
+void replace_variable_(int *exe_ret);
 
 /**
  * set_args_free - Frees up memory taken by args.
@@ -77,7 +77,7 @@ char *fetch_env_value(char *beginning, int len)
 	var[0] = '\0';
 	_strncat(var, beginning, len);
 
-	var_addr = _getenv(var);
+	var_addr = getenv(var);
 	free(var);
 	if (var_addr)
 	{
@@ -94,20 +94,20 @@ char *fetch_env_value(char *beginning, int len)
 }
 
 /**
- * replace_variable - Handles variable replacement.
+ * replace_variable_ - Handles variable replacement.
  * @args: A double pointer containing the command and arguments.
  * @exe_ret: A pointer to the return value of the last executed command.
- *
+ * 
  * Description: Replaces $$ with the current PID, $? with the return value
  *              of the last executed program, and envrionmental variables
  *              preceded by $ with their corresponding value.
  */
-void replace_variable(char **args, int *exe_ret)
+void replace_variable_(int *exe_ret)
 {
 	int j, k = 0, len;
 	char *replacement = NULL, *old_line = NULL, *new_line;
 
-	old_line = *line;
+	old_line = *new_line;
 	for (j = 0; old_line[j]; j++)
 	{
 		if (old_line[j] == '$' && old_line[j + 1] &&
@@ -135,7 +135,7 @@ void replace_variable(char **args, int *exe_ret)
 			}
 			new_line = malloc(j + _strlen(replacement)
 					  + _strlen(&old_line[k]) + 1);
-			if (!line)
+			if (!new_line)
 				return;
 			new_line[0] = '\0';
 			_strncat(new_line, old_line, j);
@@ -147,7 +147,7 @@ void replace_variable(char **args, int *exe_ret)
 			}
 			_strcat(new_line, &old_line[k]);
 			free(old_line);
-			*line = new_line;
+			*old_line = new_line;
 			old_line = new_line;
 			j = -1;
 		}

@@ -46,7 +46,7 @@ int alias_shell(char **args, char __attribute__((__unused__)) **front)
 				temp = temp->next;
 			}
 			if (!temp)
-				ret = create_error(args + i, 1);
+				ret = make_error(args + i, 1);
 		}
 		else
 			set_new_alias(args[i], value);
@@ -89,7 +89,7 @@ void set_new_alias(char *alias_name, char *value)
 		temp = temp->next;
 	}
 	if (!temp)
-		add_alias_end(&aliases, alias_name, new_value);
+		appd_alias_end(&aliases, alias_name, new_value);
 }
 
 /**
@@ -137,7 +137,7 @@ char **displace_aliases(char **args)
 				new_value = malloc(sizeof(char) * (_strlen(temp->value) + 1));
 				if (!new_value)
 				{
-					free_args(args, args);
+					set_args_free(args, args);
 					return (NULL);
 				}
 				_strcpy(new_value, temp->value);
