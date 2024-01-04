@@ -102,7 +102,7 @@ char *fetch_env_value(char *beginning, int len)
  *              of the last executed program, and envrionmental variables
  *              preceded by $ with their corresponding value.
  */
-void replace_variable_(char ** args, int *exe_ret)
+void replace_variable_(char **args, int *exe_ret)
 {
 	int j, k = 0, len;
 	char *replacement = NULL, *old_line = NULL, *new_line;
