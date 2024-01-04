@@ -95,19 +95,19 @@ char *fetch_env_value(char *beginning, int len)
 
 /**
  * replace_variable_ - Handles variable replacement.
- * @args: A double pointer containing the command and arguments.
+ * @line: A double pointer containing the command and arguments.
  * @exe_ret: A pointer to the return value of the last executed command.
  * 
  * Description: Replaces $$ with the current PID, $? with the return value
  *              of the last executed program, and envrionmental variables
  *              preceded by $ with their corresponding value.
  */
-void replace_variable_(char **args, int *exe_ret)
+void replace_variable_(char **line, int *exe_ret)
 {
 	int j, k = 0, len;
 	char *replacement = NULL, *old_line = NULL, *new_line;
 
-	old_line = *new_line;
+	old_line = *line;
 	for (j = 0; old_line[j]; j++)
 	{
 		if (old_line[j] == '$' && old_line[j + 1] &&
@@ -147,7 +147,7 @@ void replace_variable_(char **args, int *exe_ret)
 			}
 			_strcat(new_line, &old_line[k]);
 			free(old_line);
-			*old_line = new_line;
+			*line = new_line;
 			old_line = new_line;
 			j = -1;
 		}
