@@ -56,7 +56,7 @@ int setenv_shell(char **args, char __attribute__((__unused__)) **front)
 	_strcat(new_value, "=");
 	_strcat(new_value, args[1]);
 
-	env_var = _getenv(args[0]);
+	env_var = getenv(args[0]);
 	if (env_var)
 	{
 		free(*env_var);
@@ -70,7 +70,7 @@ int setenv_shell(char **args, char __attribute__((__unused__)) **front)
 	if (!new_environ)
 	{
 		free(new_value);
-		return (create_error(args, -1));
+		return (make_error(args, -1));
 	}
 
 	for (index = 0; environ[index]; index++)
