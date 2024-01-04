@@ -164,21 +164,21 @@ int cd_shell(char **args, char __attribute__((__unused__)) **front)
 int help_shell(char **args, char __attribute__((__unused__)) **front)
 {
 	if (!args[0])
-		help_all();
+		print_help_all();
 	else if (_strcmp(args[0], "alias") == 0)
-		help_alias();
+		print_help_alias();
 	else if (_strcmp(args[0], "cd") == 0)
-		help_cd();
+		print_help_cd();
 	else if (_strcmp(args[0], "exit") == 0)
-		help_exit();
+		print_help_exit();
 	else if (_strcmp(args[0], "env") == 0)
-		help_env();
+		print_help_env();
 	else if (_strcmp(args[0], "setenv") == 0)
-		help_setenv();
+		print_help_setenv();
 	else if (_strcmp(args[0], "unsetenv") == 0)
-		help_unsetenv();
+		print_help_unsetenv();
 	else if (_strcmp(args[0], "help") == 0)
-		help_help();
+		print_help_help();
 	else
 		write(STDERR_FILENO, name, _strlen(name));
 
