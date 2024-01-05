@@ -96,7 +96,7 @@ void part_line(char **line, ssize_t read)
 }
 
 /**
- * new_len - Gets the new length of a line partitioned
+ * get_new_len - Gets the new length of a line partitioned
  *               by ";", "||", "&&&", or "#".
  * @line: The line to check.
  *
@@ -105,7 +105,7 @@ void part_line(char **line, ssize_t read)
  * Description: Cuts short lines containing '#' comments with '\0'.
  */
 
-ssize_t new_len(char *line)
+ssize_t get_new_len(char *line)
 {
 	size_t i;
 	ssize_t new_len = 0;
