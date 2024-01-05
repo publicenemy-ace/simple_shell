@@ -43,7 +43,7 @@ char *get_cmd_location(char *cmd)
 		free(temp);
 	}
 
-	free_list(head);
+	set_free_list(head);
 
 	return (NULL);
 }
