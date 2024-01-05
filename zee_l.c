@@ -35,7 +35,7 @@ char *get_cmd_location(char *cmd)
 
 		if (stat(temp, &st) == 0)
 		{
-			free_list(head);
+			set_free_list(head);
 			return (temp);
 		}
 
