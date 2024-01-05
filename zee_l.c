@@ -61,7 +61,7 @@ char *fetch_full_PATH(char *path)
 	int i, length = 0;
 	char *path_copy, *pwd;
 
-	pwd = (_acqenv("PWD")) + 4;
+	pwd = *(_acqenv("PWD")) + 4;
 	for (i = 0; path[i]; i++)
 	{
 		if (path[i] == ':')
