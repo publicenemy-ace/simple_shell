@@ -1,7 +1,7 @@
 #include "main.h"
 
 void part_line(char **line, ssize_t read);
-ssize_t new_len(char *line);
+ssize_t get_new_len(char *line);
 void logical_line_ops(char *line, ssize_t *new_len);
 
 /**
@@ -19,7 +19,7 @@ void part_line(char **line, ssize_t read)
 	size_t i, j;
 	ssize_t new_len;
 
-	new_len = new_len(*line);
+	new_len = get_new_len(*line);
 	if (new_len == read - 1)
 		return;
 	new_line = malloc(new_len + 1);
