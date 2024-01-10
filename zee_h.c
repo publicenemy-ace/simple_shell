@@ -97,7 +97,7 @@ char *fetch_env_value(char *beginning, int len)
  * replace_variable_ - Handles variable replacement.
  * @line: A double pointer containing the command and arguments.
  * @exe_ret: A pointer to the return value of the last executed command.
- * 
+ *
  * Description: Replaces $$ with the current PID, $? with the return value
  *              of the last executed program, and envrionmental variables
  *              preceded by $ with their corresponding value.

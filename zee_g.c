@@ -1,7 +1,8 @@
 #include "main.h"
 
 void *mem_realloc(void *ptr, unsigned int old_s, unsigned int new_s);
-void update_lineptr(char **_lineptr, size_t *n, char *buffer, size_t buff_size);
+void update_lineptr(char **_lineptr, size_t *n,
+		char *buffer, size_t buff_size;)
 ssize_t getline(char **buff_lineptr, size_t *s, FILE *strm);
 
 /**
