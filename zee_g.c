@@ -66,7 +66,8 @@ void update_lineptr(char **_lineptr, size_t *s, char *buffer, size_t buff_s)
 {
 	if (*_lineptr == NULL)
 	{
-		if (buff_s > 120) *s = buff_s;
+		if (buff_s > 120)
+			*s = buff_s;
 		else
 			*s = 120;
 		*_lineptr = buffer;
