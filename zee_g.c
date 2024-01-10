@@ -1,8 +1,7 @@
 #include "main.h"
 
 void *mem_realloc(void *ptr, unsigned int old_s, unsigned int new_s);
-void update_lineptr(char **_lineptr, size_t *n,
-		char *buffer, size_t buff_size;)
+void update_lineptr(char **_lineptr, size_t *n, char *buffer, size_t buff_s);
 ssize_t getline(char **buff_lineptr, size_t *s, FILE *strm);
 
 /**
@@ -61,22 +60,21 @@ void *mem_realloc(void *ptr, unsigned int old_s, unsigned int new_s)
  * @_lineptr: A buffer to store an input string.
  * @s: The size of lineptr.
  * @buffer: The string to assign to lineptr.
- * @buff_size: The size of buffer.
+ * @buff_s: The size of buffer.
  */
-void update_lineptr(char **_lineptr, size_t *s, char *buffer, size_t buff_size)
+void update_lineptr(char **_lineptr, size_t *s, char *buffer, size_t buff_s)
 {
 	if (*_lineptr == NULL)
 	{
-		if (buff_size > 120)
-			*s = buff_size;
+		if (buff_s > 120) *s = buff_s;
 		else
 			*s = 120;
 		*_lineptr = buffer;
 	}
-	else if (*s < buff_size)
+	else if (*s < buff_s)
 	{
-		if (buff_size > 120)
-			*s = buff_size;
+		if (buff_s > 120)
+			*s = buff_s;
 		else
 			*s = 120;
 		*_lineptr = buffer;
